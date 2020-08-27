@@ -3,14 +3,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:cardElevation="6dp"
-    android:background="#FFF"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_elevation"
+    android:background="@color/color_gray_light_background"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="@dimen/padding_small"
         android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,20 +19,20 @@
         <ImageView
             android:id="@+id/listPictureImage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/picture_height"
+            android:scaleType="matrix"
             app:srcCompat="@drawable/ic_launcher_foreground"
             tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/listPictureTextName"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="@dimen/card_text_size"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            tools:text = "Sample name"/>
+            android:layout_marginBottom="@dimen/padding_small"
+            android:layout_marginTop="@dimen/padding_large"
+            android:layout_marginStart="@dimen/padding_small" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

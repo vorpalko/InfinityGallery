@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+
     <dimen name="card_margin">16dp</dimen>
+    <dimen name="card_corner_radius">6dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="picture_height">300dp</dimen>
+    <dimen name="card_text_size">16sp</dimen>
 </resources>
