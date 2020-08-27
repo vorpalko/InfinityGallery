@@ -16,7 +16,6 @@ class PictureHolder(
         itemView.listPictureTextName.text = picture.author
         Glide.with(itemView.context)
             .load(picture.download_url)
-            .placeholder(R.drawable.ic_launcher_background)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(itemView.listPictureImage)
     }

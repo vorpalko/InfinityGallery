@@ -1,6 +1,8 @@
 package com.example.scrollinggallery.network
 
 import com.example.scrollinggallery.BuildConfig
+import com.example.scrollinggallery.network.api.PicsumApi
+import com.example.scrollinggallery.network.util.API_ENDPOINT
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -19,7 +21,7 @@ object ApiUtils {
 
     private fun createRetrofitClient() =
         Retrofit.Builder()
-            .baseUrl(BuildConfig.API_ENDPOINT)
+            .baseUrl(API_ENDPOINT)
             .client(createBasicClient())
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
