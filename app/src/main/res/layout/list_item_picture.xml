@@ -9,6 +9,13 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
+    <com.example.scrollinggallery.ui.view.CircleProgressBar
+        android:id="@+id/listPictureProgressBar"
+        app:progressbarColor="@color/progress_gray"
+        android:layout_gravity="center"
+        android:layout_width="@dimen/progressBar_size"
+        android:layout_height="@dimen/progressBar_size" />
+
     <LinearLayout
         android:orientation="vertical"
         android:padding="@dimen/padding_small"
@@ -24,15 +31,24 @@
             app:srcCompat="@drawable/ic_launcher_foreground"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/listPictureTextName"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="@dimen/card_text_size"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/padding_small"
-            android:layout_marginTop="@dimen/padding_large"
-            android:layout_marginStart="@dimen/padding_small" />
-
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/listPictureTextName"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowColor="#000000"
+        android:shadowRadius="1.6"
+
+        android:layout_marginStart="@dimen/padding_in_card_side"
+        android:layout_marginBottom="@dimen/padding_in_card_bottom"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/card_text_size"
+        android:textStyle="bold" />
+
 </androidx.cardview.widget.CardView>

@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.ui.adapters.recycler.data
+package com.example.scrollinggallery.ui.adapter.data
 
 import com.example.scrollinggallery.network.util.PAGE_SIZE
 import androidx.lifecycle.LiveData

@@ -1,8 +1,8 @@
 package com.example.scrollinggallery.network
 
-import com.example.scrollinggallery.BuildConfig
 import com.example.scrollinggallery.network.api.PicsumApi
 import com.example.scrollinggallery.network.util.API_ENDPOINT
+import me.jessyan.progressmanager.ProgressManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -11,6 +11,17 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object ApiUtils {
 
     private var api: PicsumApi? = null
+    private var progressClient: OkHttpClient? = null
+
+    fun getOkHttpClient(): OkHttpClient?{
+        if(progressClient == null){
+            progressClient =
+                ProgressManager.getInstance()
+                    .with(OkHttpClient.Builder())
+                    .build()
+        }
+        return progressClient
+    }
 
     fun getPicsumApi(): PicsumApi? {
         if(api == null){

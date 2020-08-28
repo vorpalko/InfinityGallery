@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.ui.adapters.recycler
+package com.example.scrollinggallery.ui.adapter
 
 import android.graphics.Rect
 import android.view.View

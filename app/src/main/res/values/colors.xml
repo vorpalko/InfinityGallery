@@ -4,5 +4,12 @@
     <color name="colorPrimaryDark">#8F879F</color>
     <color name="colorAccent">#638A86</color>
 
+    <color name="color_white">#FFFFFF</color>
+
     <color name="color_gray_light_background">#E6E6E6</color>
+
+    <color name="progress_gray">#C5C5C5</color>
+
+    <color name="color_red">#FF0000</color>
+
 </resources>

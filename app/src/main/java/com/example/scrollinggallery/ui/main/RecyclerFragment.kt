@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scrollinggallery.R
-import com.example.scrollinggallery.ui.adapters.recycler.PicsumAdapter
-import com.example.scrollinggallery.ui.adapters.recycler.data.PicsumViewModel
-import com.example.scrollinggallery.ui.adapters.recycler.PictureCardDecoration
+import com.example.scrollinggallery.ui.adapter.PicsumAdapter
+import com.example.scrollinggallery.ui.adapter.data.PicsumViewModel
+import com.example.scrollinggallery.ui.adapter.PictureCardDecoration
 import kotlinx.android.synthetic.main.fragment_recycler.*
 
 class RecyclerFragment : Fragment(){
@@ -32,6 +32,7 @@ class RecyclerFragment : Fragment(){
     private fun initRecycler(){
         val picsumViewModel = ViewModelProvider(this).get(PicsumViewModel::class.java)
         val picsumAdapter = PicsumAdapter()
+        picsumAdapter.setHasStableIds(true)
 
         picsumViewModel.itemPagedList.observe(this, {
                 pics -> picsumAdapter.submitList(pics)

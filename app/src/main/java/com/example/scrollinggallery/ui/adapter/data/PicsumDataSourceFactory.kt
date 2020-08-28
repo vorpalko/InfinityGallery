@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.ui.adapters.recycler.data
+package com.example.scrollinggallery.ui.adapter.data
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource

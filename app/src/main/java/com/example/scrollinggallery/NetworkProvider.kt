@@ -1,4 +1,3 @@
 package com.example.scrollinggallery
 
-class NetworkProvider {
-}
+class NetworkProvider
