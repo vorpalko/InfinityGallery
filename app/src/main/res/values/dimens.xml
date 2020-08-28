@@ -3,12 +3,12 @@
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_large">16dp</dimen>
 
-    <dimen name="padding_in_card_bottom">24dp</dimen>
-    <dimen name="padding_in_card_side">20dp</dimen>
+    <dimen name="padding_in_card_bottom">20dp</dimen>
+    <dimen name="padding_in_card_side">18dp</dimen>
 
     <dimen name="card_margin">16dp</dimen>
-    <dimen name="card_corner_radius">6dp</dimen>
-    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_corner_radius">10dp</dimen>
+    <dimen name="card_elevation">12dp</dimen>
     <dimen name="picture_height">400dp</dimen>
     <dimen name="card_text_size">18sp</dimen>
 
