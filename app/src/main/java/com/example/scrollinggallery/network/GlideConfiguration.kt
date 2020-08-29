@@ -11,7 +11,7 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
 import com.example.scrollinggallery.network.ApiUtils.getOkHttpClient
-import com.example.scrollinggallery.network.util.CACHE_ENABLED
+import com.example.scrollinggallery.network.utils.CACHE_ENABLED
 import java.io.InputStream
 
 @GlideModule
@@ -22,7 +22,8 @@ class GlideConfiguration : AppGlideModule(){
     override fun applyOptions(context: Context, builder: GlideBuilder){
         val cacheStrategy =
             if (CACHE_ENABLED)
-                DiskCacheStrategy.ALL
+                DiskCacheStrategy.RESOURCE
+                //DiskCacheStrategy.ALL
             else
                 DiskCacheStrategy.NONE
 

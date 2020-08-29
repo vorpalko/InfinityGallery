@@ -1,7 +1,7 @@
 package com.example.scrollinggallery.network.api
 
 import com.example.scrollinggallery.network.data.PicsumDTO
-import com.example.scrollinggallery.network.util.*
+import com.example.scrollinggallery.network.utils.*
 import retrofit2.Call
 import retrofit2.http.*
 

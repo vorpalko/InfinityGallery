@@ -1,12 +1,11 @@
 <resources>
-
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:fontFamily">@font/hk_nova</item>
         <item name="fontFamily">@font/hk_nova</item>
 
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/colorPrimaryRed</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkRed</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
 
+    </style>
 </resources>

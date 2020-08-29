@@ -3,8 +3,8 @@ package com.example.scrollinggallery.ui.adapter.data
 import androidx.paging.PageKeyedDataSource
 import com.example.scrollinggallery.network.ApiUtils
 import com.example.scrollinggallery.network.data.PicsumDTO
-import com.example.scrollinggallery.network.util.FIRST_PAGE
-import com.example.scrollinggallery.network.util.PAGE_SIZE
+import com.example.scrollinggallery.network.utils.FIRST_PAGE
+import com.example.scrollinggallery.network.utils.PAGE_SIZE
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -5,33 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:cardCornerRadius="@dimen/card_corner_radius"
     app:cardElevation="@dimen/card_elevation"
-    android:background="@color/color_gray_light_background"
+    android:background="@color/color_light_gray_background"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
     <com.example.scrollinggallery.ui.view.CircleProgressBar
         android:id="@+id/listPictureProgressBar"
+        android:visibility="gone"
         app:progressbarColor="@color/progress_gray"
         android:layout_gravity="center"
         android:layout_width="@dimen/progressBar_size"
         android:layout_height="@dimen/progressBar_size" />
 
-    <LinearLayout
-        android:orientation="vertical"
-
-        android:background="?attr/selectableItemBackground"
+    <ImageView
+        android:id="@+id/listPictureImage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/listPictureImage"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/picture_height"
-            android:scaleType="matrix"
-            app:srcCompat="@drawable/ic_launcher_foreground"
-            tools:ignore="ContentDescription" />
-
-    </LinearLayout>
+        android:layout_height="@dimen/picture_height"
+        android:scaleType="matrix"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/listPictureTextName"
@@ -40,17 +32,40 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
 
-
-
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowColor="#000000"
         android:shadowRadius="1.6"
 
-        android:layout_marginStart="@dimen/padding_in_card_side"
-        android:layout_marginBottom="@dimen/padding_in_card_bottom"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="28dp"
         android:textColor="@color/color_white"
         android:textSize="@dimen/card_text_size"
         android:textStyle="bold" />
+<!--
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|end"
+
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="24dp"
+
+        app:srcCompat="@drawable/ic_baseline_favorite_border_shadow" />-->
+
+    <ToggleButton
+        android:id="@+id/listPictureToggleLike"
+        android:visibility="gone"
+        android:layout_width= "38dp"
+        android:layout_height="38dp"
+        android:textOn=""
+        android:textOff=""
+
+        android:layout_gravity="bottom|end"
+
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="26dp"
+
+        android:background="@drawable/like_selector" />
 
 </androidx.cardview.widget.CardView>

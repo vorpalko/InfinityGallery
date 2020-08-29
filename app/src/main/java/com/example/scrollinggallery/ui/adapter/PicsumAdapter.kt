@@ -12,7 +12,7 @@ class PicsumAdapter: PagedListAdapter<PicsumDTO, PictureHolder>(PicturesDiffCall
     companion object {
         val PicturesDiffCallback = object : DiffUtil.ItemCallback<PicsumDTO>() {
             override fun areItemsTheSame(oldItem: PicsumDTO, newItem: PicsumDTO) =
-                oldItem.download_url == newItem.download_url
+                oldItem.url == newItem.url
 
             override fun areContentsTheSame(oldItem: PicsumDTO, newItem: PicsumDTO) =
                 oldItem == newItem

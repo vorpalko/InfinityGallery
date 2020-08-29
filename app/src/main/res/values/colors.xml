@@ -2,14 +2,24 @@
 <resources>
     <color name="colorPrimary">#3F4055</color>
     <color name="colorPrimaryDark">#28273E</color>
-    <color name="colorAccent">#8A6363</color>
+    <color name="colorAccent">#FF0000</color>
 
+    <color name="colorPrimaryRed">#553F54</color>
+    <color name="colorPrimaryDarkRed">#38273E</color>
+    <color name="color_light_gray_background_red">#F3EBF4</color>
+
+    <color name="colorPrimaryTest">#ffeb3c</color>
+    <color name="colorPrimaryDarkTest">#ffd741</color>
+    <color name="color_light_gray_background_test">#F3EBF4</color>
+
+    <color name="colorPrimaryTes2t">#ffeb3c</color>
+    <color name="colorPrimaryDarkTest2">#ffd741</color>
+    <color name="color_light_gray_background_test2">#F3EBF4</color>
+
+    <color name="color_black">#000000</color>
     <color name="color_white">#FFFFFF</color>
 
-    <color name="color_gray_light_background">#F6F7FF</color>
+    <color name="color_light_gray_background">#F6F7FF</color>
 
     <color name="progress_gray">#C5C5C5</color>
-
-    <color name="color_red">#FF0000</color>
-
 </resources>

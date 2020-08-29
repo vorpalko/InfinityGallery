@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scrollinggallery.R
 import com.example.scrollinggallery.ui.adapter.PicsumAdapter
 import com.example.scrollinggallery.ui.adapter.data.PicsumViewModel
-import com.example.scrollinggallery.ui.adapter.PictureCardDecoration
+import com.example.scrollinggallery.ui.adapter.utils.PictureCardDecoration
 import kotlinx.android.synthetic.main.fragment_recycler.*
 
 class RecyclerFragment : Fragment(){

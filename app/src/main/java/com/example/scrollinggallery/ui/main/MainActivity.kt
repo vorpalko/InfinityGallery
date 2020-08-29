@@ -1,11 +1,8 @@
 package com.example.scrollinggallery.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.scrollinggallery.R
-
-//0.6
-//0.6 header
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.network.util
+package com.example.scrollinggallery.network.utils
 
 
 const val PAGE_SIZE = 4
@@ -12,4 +12,4 @@ const val QUERY_ID = "id"
 const val QUERY_PAGE = "page"
 const val QUERY_LIMIT = "limit"
 
-const val CACHE_ENABLED = false //todo:
+const val CACHE_ENABLED = true

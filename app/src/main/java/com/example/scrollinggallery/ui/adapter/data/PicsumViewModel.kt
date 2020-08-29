@@ -1,6 +1,6 @@
 package com.example.scrollinggallery.ui.adapter.data
 
-import com.example.scrollinggallery.network.util.PAGE_SIZE
+import com.example.scrollinggallery.network.utils.PAGE_SIZE
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder

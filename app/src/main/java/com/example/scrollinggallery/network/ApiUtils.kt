@@ -1,7 +1,7 @@
 package com.example.scrollinggallery.network
 
 import com.example.scrollinggallery.network.api.PicsumApi
-import com.example.scrollinggallery.network.util.API_ENDPOINT
+import com.example.scrollinggallery.network.utils.API_ENDPOINT
 import me.jessyan.progressmanager.ProgressManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
