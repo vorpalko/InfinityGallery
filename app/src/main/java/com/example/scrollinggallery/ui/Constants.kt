@@ -1,5 +1,6 @@
 package com.example.scrollinggallery.ui
 
+const val DB_NAME = "pics.db"
 
 const val IMAGE_FADE_DURATION = 700
 

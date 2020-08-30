@@ -9,10 +9,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scrollinggallery.R
-import com.example.scrollinggallery.data.model.ResponseDTO
 import com.example.scrollinggallery.domain.Pic
 import com.example.scrollinggallery.ui.adapter.PicsumAdapter
-import com.example.scrollinggallery.ui.adapter.PicsumViewModel
+import com.example.scrollinggallery.domain.DataSourceViewModel
 import com.example.scrollinggallery.ui.adapter.utils.PictureCardDecoration
 import kotlinx.android.synthetic.main.fragment_recycler.*
 
@@ -46,7 +45,8 @@ class RecyclerFragment : Fragment(){
     }
 
     private fun initObserve(){
-        val picsumViewModel = ViewModelProvider(this).get(PicsumViewModel::class.java)
+
+        val picsumViewModel = ViewModelProvider(this).get(DataSourceViewModel::class.java)
         picsumViewModel.itemPagedList.observe(this, { pics ->
             picsumAdapter.submitList(pics)
             //pics?.let { showLayer(pics) }

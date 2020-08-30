@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.ui.adapter
+package com.example.scrollinggallery.domain
 
 import com.example.scrollinggallery.network.utils.PAGE_SIZE
 import androidx.lifecycle.ViewModel
@@ -7,7 +7,10 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.example.scrollinggallery.domain.PicsDataSourceFactory
 
-class PicsumViewModel: ViewModel() {
+class DataSourceViewModel(
+         //repo: PicsRepository
+): ViewModel() {
+
     private val dataSourceFactory = PicsDataSourceFactory(viewModelScope)
 
     private val pagedListConfig = PagedList.Config.Builder()

@@ -1,22 +1,30 @@
 package com.example.scrollinggallery.domain
 
 import androidx.paging.PageKeyedDataSource
+import com.example.scrollinggallery.data.LocalRepository
+import com.example.scrollinggallery.data.PicsRepository
 import com.example.scrollinggallery.data.RemoteRepository
+import com.example.scrollinggallery.data.db.PicsDatabase
 import com.example.scrollinggallery.network.utils.FIRST_PAGE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
 class PicsDataSource(
-            private val scope: CoroutineScope
+            private val scope: CoroutineScope,
+            //private val repo: PicsRepository
 ): PageKeyedDataSource<Int, Pic>() {
+
+    private val repository = LocalRepository()
+
+    private val repoOnlife = RemoteRepository()
+    private val repoOffline = LocalRepository()
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Pic>
     ) {
         scope.launch {
-            val data = RemoteRepository().getList(1)
+            val data = repository.getList(FIRST_PAGE)
             callback.onResult(data, null, FIRST_PAGE + 1)
         }
     }
@@ -26,12 +34,8 @@ class PicsDataSource(
         callback: LoadCallback<Int, Pic>
     ) {
         scope.launch {
-            val data = RemoteRepository().getList(params.key)
-
-            var key = params.key
-            if(key > 1)
-                key--
-            callback.onResult(data, key)
+            val data = repository.getList(params.key)
+            callback.onResult(data, decremented(params.key))
         }
     }
 
@@ -40,7 +44,7 @@ class PicsDataSource(
         callback: LoadCallback<Int, Pic>
     ) {
         scope.launch {
-            val data = RemoteRepository().getList(params.key)
+            val data = repository.getList(params.key)
             callback.onResult(data,params.key + 1)
         }
     }

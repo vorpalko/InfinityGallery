@@ -1,4 +1,6 @@
-package com.example.scrollinggallery.domain
+package com.example.scrollinggallery.data
+
+import com.example.scrollinggallery.domain.Pic
 
 interface PicsRepository {
 
