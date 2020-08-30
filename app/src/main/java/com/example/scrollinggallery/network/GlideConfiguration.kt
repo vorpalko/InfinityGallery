@@ -10,12 +10,18 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
-import com.example.scrollinggallery.network.ApiUtils.getOkHttpClient
 import com.example.scrollinggallery.network.utils.CACHE_ENABLED
+import me.jessyan.progressmanager.ProgressManager
+import okhttp3.OkHttpClient
 import java.io.InputStream
 
 @GlideModule
 class GlideConfiguration : AppGlideModule(){
+
+    private fun getOkHttpClient(): OkHttpClient =
+        ProgressManager.getInstance()
+            .with(OkHttpClient.Builder())
+            .build()
 
     override fun isManifestParsingEnabled() = false
 
@@ -38,7 +44,7 @@ class GlideConfiguration : AppGlideModule(){
         registry.replace(
             GlideUrl::class.java,
             InputStream::class.java,
-            OkHttpUrlLoader.Factory(getOkHttpClient()!!)
+            OkHttpUrlLoader.Factory(getOkHttpClient())
         )
     }
 }

@@ -1,41 +1,34 @@
 package com.example.scrollinggallery.ui.adapter
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.example.scrollinggallery.R
-import com.example.scrollinggallery.network.data.PicsumDTO
+import com.example.scrollinggallery.data.model.ResponseDTO
+import com.example.scrollinggallery.domain.Pic
 
-class PicsumAdapter: PagedListAdapter<PicsumDTO, PictureHolder>(PicturesDiffCallback) {
-
-    companion object {
-        val PicturesDiffCallback = object : DiffUtil.ItemCallback<PicsumDTO>() {
-            override fun areItemsTheSame(oldItem: PicsumDTO, newItem: PicsumDTO) =
-                oldItem.url == newItem.url
-
-            override fun areContentsTheSame(oldItem: PicsumDTO, newItem: PicsumDTO) =
-                oldItem == newItem
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PictureHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_item_picture, parent, false)
-        return PictureHolder(view)
-    }
+class PicsumAdapter: PagedListAdapter<Pic, PictureHolder>(PicturesDiffCallback) {
 
     override fun onBindViewHolder(holder: PictureHolder, position: Int) {
         val item = getItem(position)
-        item?.let {
-            holder.bind(item)
-        }
+        item?.let { holder.bind(item) }
     }
 
-/*  Переопределение этих методов нужно для решения проблемы, возникающей, когда пользователь
-    видит на холдерах, вытащенных из пула ресайклера, старые значения*/
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        PictureHolder(parent)
 
+    /*  Переопределение этих методов нужно для решения проблемы, возникающей, когда пользователь
+    видит на холдерах, вытащенных из пула ресайклера, старые значения*/
     override fun getItemId(position: Int) = position.toLong()
 
-    override fun getItemViewType(position: Int) =  position
+    override fun getItemViewType(position: Int) = position
+
+    companion object {
+        private val PicturesDiffCallback = object : DiffUtil.ItemCallback<Pic>() {
+            override fun areItemsTheSame(oldItem: Pic, newItem: Pic) =
+                oldItem.url == newItem.url
+
+            override fun areContentsTheSame(oldItem: Pic, newItem: Pic) =
+                oldItem == newItem
+        }
+    }
 }

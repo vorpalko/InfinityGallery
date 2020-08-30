@@ -2,11 +2,14 @@ package com.example.scrollinggallery.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.GestureDetector
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.scrollinggallery.network.data.PicsumDTO
+import com.example.scrollinggallery.R
+import com.example.scrollinggallery.data.model.ResponseDTO
+import com.example.scrollinggallery.domain.Pic
 import kotlinx.android.synthetic.main.list_item_picture.view.*
 import me.jessyan.progressmanager.ProgressManager
 import com.example.scrollinggallery.ui.adapter.utils.DoubleTapListener
@@ -14,11 +17,13 @@ import com.example.scrollinggallery.ui.adapter.utils.ImageDownloadProgressListen
 import com.example.scrollinggallery.ui.adapter.utils.ResourceDownloadingListener
 
 class PictureHolder(
-            itemView: View
-): RecyclerView.ViewHolder(itemView) {
+            parent: ViewGroup
+): RecyclerView.ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_picture, parent, false)
+){
 
     @SuppressLint("ClickableViewAccessibility")
-    fun bind(picture: PicsumDTO) {
+    fun bind(picture: Pic) {
         itemView.listPictureTextName.text = picture.author
         itemView.listPictureToggleLike.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
@@ -31,8 +36,8 @@ class PictureHolder(
         loadImage(picture.url)
     }
 
-    fun setImageIsLiked(pic: PicsumDTO?){
-        Toast.makeText(itemView.context, pic?.id.toString(), Toast.LENGTH_SHORT).show()
+    fun setImageIsLiked(pic: Pic){
+        Toast.makeText(itemView.context, pic.id.toString(), Toast.LENGTH_SHORT).show()
     }
 
     private fun loadImage(url: String){
