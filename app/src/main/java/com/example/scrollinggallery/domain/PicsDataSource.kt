@@ -1,17 +1,13 @@
 package com.example.scrollinggallery.domain
 
 import androidx.paging.PageKeyedDataSource
-import com.example.scrollinggallery.data.LocalRepository
 import com.example.scrollinggallery.data.PicsRepository
-import com.example.scrollinggallery.data.RemoteRepository
-import com.example.scrollinggallery.data.db.PicsDatabase
-import com.example.scrollinggallery.network.utils.FIRST_PAGE
+import com.example.scrollinggallery.data.network.FIRST_PAGE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class PicsDataSource(
             private val scope: CoroutineScope,
-            //private val repository: PicsRepository
             private val repository: PicsRepository
 ): PageKeyedDataSource<Int, Pic>() {
 

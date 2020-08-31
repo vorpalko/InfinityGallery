@@ -42,16 +42,6 @@
         android:textColor="@color/color_white"
         android:textSize="@dimen/card_text_size"
         android:textStyle="bold" />
-<!--
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_gravity="bottom|end"
-
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="24dp"
-
-        app:srcCompat="@drawable/ic_baseline_favorite_border_shadow" />-->
 
     <ToggleButton
         android:id="@+id/listPictureToggleLike"
@@ -67,5 +57,14 @@
         android:layout_marginEnd="26dp"
 
         android:background="@drawable/like_selector" />
+
+    <com.example.scrollinggallery.ui.view.LikeView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:likeColor="@color/color_white"
+        app:likeSize="400dp"
+        app:likeSrc="@drawable/ic_heart_white_80"
+        android:id="@+id/listPictureImageLike"/>
 
 </androidx.cardview.widget.CardView>

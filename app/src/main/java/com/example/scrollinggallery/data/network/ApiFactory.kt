@@ -1,9 +1,6 @@
-package com.example.scrollinggallery.network
+package com.example.scrollinggallery.data.network
 
-import com.example.scrollinggallery.network.api.PicsumApi
-import com.example.scrollinggallery.network.utils.API_ENDPOINT
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import me.jessyan.progressmanager.ProgressManager
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     var itemFavorites: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

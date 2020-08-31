@@ -6,12 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.scrollinggallery.AppController
 import com.example.scrollinggallery.R
 import com.example.scrollinggallery.data.LocalRepository
 import com.example.scrollinggallery.data.PicsRepository
@@ -20,10 +16,8 @@ import com.example.scrollinggallery.domain.Pic
 import com.example.scrollinggallery.ui.adapter.PicsumAdapter
 import com.example.scrollinggallery.domain.DataSourceViewModel
 import com.example.scrollinggallery.domain.DataSourceViewModelFactory
-import com.example.scrollinggallery.ui.adapter.utils.PictureCardDecoration
+import com.example.scrollinggallery.ui.adapter.extensions.PictureCardDecoration
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class RecyclerFragment : Fragment(){
 
@@ -45,10 +39,7 @@ class RecyclerFragment : Fragment(){
         setupList(repoToSetData())
 
         button.setOnClickListener {
-
-
             setupList(repoToSetData())
-            //picsumAdapter.notifyDataSetChanged()
         }
     }
 
@@ -78,9 +69,7 @@ class RecyclerFragment : Fragment(){
                 by viewModels { DataSourceViewModelFactory(storage) }
 
         picsumViewModel.itemPagedList.observe(viewLifecycleOwner, { pics ->
-
             picsumAdapter.submitList(pics)
-
             //pics?.let { showLayer(pics) }
         })
     }

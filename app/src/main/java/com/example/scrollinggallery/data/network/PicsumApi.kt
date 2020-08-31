@@ -1,8 +1,6 @@
-package com.example.scrollinggallery.network.api
+package com.example.scrollinggallery.data.network
 
 import com.example.scrollinggallery.data.model.ResponseDTO
-import com.example.scrollinggallery.network.utils.*
-import retrofit2.Call
 import retrofit2.http.*
 
 interface PicsumApi {

@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.main.MainActivity">
+        <activity
+            android:theme="@style/AppTheme.Launcher"
+            android:name=".ui.main.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

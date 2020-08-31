@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.ui.adapter.utils
+package com.example.scrollinggallery.ui.adapter.extensions
 
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -9,12 +9,13 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.DrawableCrossFadeTransition
-import com.example.scrollinggallery.ui.IMAGE_FADE_DURATION
 
 class ResourceDownloadingListener(
             private val nameText: TextView,
             private val likeButton: ToggleButton
 ): RequestListener<Drawable> {
+
+    private val animDuration = 700
 
     override fun onResourceReady(resource: Drawable,
                                  model: Any,
@@ -24,7 +25,7 @@ class ResourceDownloadingListener(
     ): Boolean {
         nameText.visibility = View.VISIBLE
         likeButton.visibility = View.VISIBLE
-        target.onResourceReady(resource, DrawableCrossFadeTransition(IMAGE_FADE_DURATION, isFirstResource))
+        target.onResourceReady(resource, DrawableCrossFadeTransition(animDuration, isFirstResource))
         return true
     }
 

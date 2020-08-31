@@ -8,9 +8,6 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import com.example.scrollinggallery.R
-import com.example.scrollinggallery.ui.PROGRESS_BAR_BOTTOM_LAYER_ALPHA
-import com.example.scrollinggallery.ui.PROGRESS_BAR_MAX_PROGRESS
-import com.example.scrollinggallery.ui.PROGRESS_BAR_THICKNESS
 import kotlin.math.roundToInt
 
 class CircleProgressBar(
@@ -21,9 +18,9 @@ class CircleProgressBar(
     private var progress = 0f
 
     private var progressColor = Color.DKGRAY
-    private val bottomLayerAlpha = PROGRESS_BAR_BOTTOM_LAYER_ALPHA
-    private val max = PROGRESS_BAR_MAX_PROGRESS
-    private val thickness = PROGRESS_BAR_THICKNESS
+    private val bottomLayerAlpha = 0.3f
+    private val max = 100
+    private val thickness = 5f
 
     private var rectF = RectF()
     private val backgroundPaint = Paint(Paint.ANTI_ALIAS_FLAG)

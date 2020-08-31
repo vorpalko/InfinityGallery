@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.room.Room
 import com.example.scrollinggallery.data.db.PicsDao
 import com.example.scrollinggallery.data.db.PicsDatabase
-import com.example.scrollinggallery.ui.DB_NAME
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -23,7 +22,7 @@ class AppController: Application() {
         if (BuildConfig.DEBUG)
             Timber.plant(DebugTree())
 
-        database = Room.databaseBuilder(baseContext, PicsDatabase::class.java, DB_NAME)
+        database = Room.databaseBuilder(baseContext, PicsDatabase::class.java, "pics.db")
             .fallbackToDestructiveMigration()
             .build().picsDao()
 

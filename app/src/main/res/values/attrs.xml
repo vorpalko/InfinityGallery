@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
     <declare-styleable name="CircleProgressBar">
         <attr name="progressbarColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="LikeView">
+        <attr name="likeColor" format="color" />
+        <attr name="likeSize" format="dimension" />
+        <attr name="likeSrc" format="reference" />
     </declare-styleable>
 
 </resources>
