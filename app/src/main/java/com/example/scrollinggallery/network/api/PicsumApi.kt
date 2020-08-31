@@ -7,11 +7,6 @@ import retrofit2.http.*
 
 interface PicsumApi {
 
-    @GET(PATH_GET_ID)
-    suspend fun getPictureById(
-        @Path(QUERY_ID) id: Int
-    ): ResponseDTO
-
     @GET(PATH_GET_LIST)
     suspend fun getPicturesByPage(
         @Query(QUERY_PAGE) page: Int,

@@ -9,11 +9,11 @@ import kotlinx.coroutines.CoroutineScope
 
 class PicsDataSourceFactory(
                 private val scope: CoroutineScope,
-                //private val repo: PicsRepository
+                private val repo: PicsRepository
 ): DataSource.Factory<Int, Pic>() {
 
     override fun create(): DataSource<Int, Pic> {
-        val picDataSource = PicsDataSource(scope)
+        val picDataSource = PicsDataSource(scope, repo)
         val picsumLiveDataSource = MutableLiveData<PageKeyedDataSource<Int, Pic>>()
 
         picsumLiveDataSource.postValue(picDataSource)

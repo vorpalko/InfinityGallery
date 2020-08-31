@@ -11,13 +11,9 @@ import kotlinx.coroutines.launch
 
 class PicsDataSource(
             private val scope: CoroutineScope,
-            //private val repo: PicsRepository
+            //private val repository: PicsRepository
+            private val repository: PicsRepository
 ): PageKeyedDataSource<Int, Pic>() {
-
-    private val repository = LocalRepository()
-
-    private val repoOnlife = RemoteRepository()
-    private val repoOffline = LocalRepository()
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,

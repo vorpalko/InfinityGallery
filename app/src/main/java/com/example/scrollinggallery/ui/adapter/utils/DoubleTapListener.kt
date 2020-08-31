@@ -14,7 +14,7 @@ class DoubleTapListener(
     override fun onDoubleTap(e: MotionEvent): Boolean {
         if(likeButton.visibility == View.VISIBLE){
             if(!likeButton.isChecked){
-                likeButton.toggle()
+                likeButton.callOnClick()
             }
         }
         return true

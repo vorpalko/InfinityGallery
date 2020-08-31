@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class PictureEntity(
     @ColumnInfo val picture_id : Int,
     @ColumnInfo val author : String,
-    @ColumnInfo val url : String
+    @ColumnInfo val url : String,
 ){
     @PrimaryKey(autoGenerate = true) var id : Int = 0
 }

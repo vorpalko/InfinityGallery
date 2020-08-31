@@ -2,7 +2,6 @@ package com.example.scrollinggallery.data.db
 
 import androidx.room.*
 import com.example.scrollinggallery.data.model.PictureEntity
-import org.jetbrains.annotations.NotNull
 
 @Dao
 interface PicsDao {
@@ -10,7 +9,8 @@ interface PicsDao {
     @Query("SELECT * FROM PictureEntity WHERE id = :id")
     suspend fun getById(id: Int): PictureEntity
 
-    @Query("SELECT * FROM PictureEntity WHERE id BETWEEN :from AND :to")
+    //@Query("SELECT * FROM PictureEntity WHERE id BETWEEN :from AND :to")
+    @Query("SELECT * FROM PictureEntity LIMIT :to OFFSET :from")
     suspend fun getPage(from: Int, to: Int): List<PictureEntity>
 
     @Query("SELECT * FROM PictureEntity")
@@ -22,6 +22,6 @@ interface PicsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertList(pics: List<PictureEntity>)
 
-    @Delete
-    suspend fun delete(pic: PictureEntity)
+    @Query("DELETE FROM PictureEntity WHERE picture_id = :id")
+    suspend fun delete(id: Int)
 }

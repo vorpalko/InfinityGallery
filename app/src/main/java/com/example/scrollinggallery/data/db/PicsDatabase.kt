@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.scrollinggallery.data.model.PictureEntity
 
-@Database(entities = [PictureEntity::class], version = 5, exportSchema = false)
+@Database(entities = [PictureEntity::class], version = 36, exportSchema = false)
 abstract class PicsDatabase : RoomDatabase() {
     abstract fun picsDao() : PicsDao
 }

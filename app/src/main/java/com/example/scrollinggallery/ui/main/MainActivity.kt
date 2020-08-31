@@ -1,5 +1,6 @@
 package com.example.scrollinggallery.ui.main
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,14 +17,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        supportActionBar?.setDisplayShowHomeEnabled(false)
-
         savedInstanceState?:let {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.mainFrameContainer, RecyclerFragment().newInstance())
                 .commit()
         }
+    }
+
+    override fun onPause() {
+
+        super.onPause()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
