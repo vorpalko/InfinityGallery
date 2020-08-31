@@ -1,9 +1,10 @@
 package com.example.scrollinggallery.data
 
 import com.example.scrollinggallery.domain.Pic
-import com.example.scrollinggallery.domain.hasInLocalStorage
+import com.example.scrollinggallery.data.util.hasInLocalStorage
 import com.example.scrollinggallery.data.network.ApiFactory
-import com.example.scrollinggallery.data.network.PAGE_SIZE
+import com.example.scrollinggallery.data.util.PAGE_SIZE
+import com.example.scrollinggallery.data.util.PicturesMapper
 
 class RemoteRepository : PicsRepository {
 

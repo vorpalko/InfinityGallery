@@ -14,12 +14,10 @@ import com.example.scrollinggallery.data.PicsRepository
 import com.example.scrollinggallery.data.RemoteRepository
 import com.example.scrollinggallery.domain.Pic
 import com.example.scrollinggallery.ui.adapter.PicsumAdapter
-import com.example.scrollinggallery.domain.DataSourceViewModel
-import com.example.scrollinggallery.domain.DataSourceViewModelFactory
-import com.example.scrollinggallery.ui.adapter.extensions.PictureCardDecoration
+import com.example.scrollinggallery.ui.adapter.extensions.PictureCardDecorator
 import kotlinx.android.synthetic.main.fragment_recycler.*
 
-class RecyclerFragment : Fragment(){
+class PicsListFragment : Fragment(){
 
     var isLocalStorage = true
 
@@ -37,19 +35,19 @@ class RecyclerFragment : Fragment(){
         initRecycler()
 
         setupList(repoToSetData())
+    }
 
-        button.setOnClickListener {
-            setupList(repoToSetData())
-        }
+    fun changeRepositoryType(){
+        setupList(repoToSetData())
     }
 
     fun newInstance() =
-        RecyclerFragment()
+        PicsListFragment()
 
     private fun initRecycler(){
         fragmentRecyclerList.apply {
             layoutManager = LinearLayoutManager(activity)
-            addItemDecoration(PictureCardDecoration())
+            addItemDecoration(PictureCardDecorator())
             picsumAdapter.setHasStableIds(true)
             adapter = picsumAdapter
         }
@@ -67,10 +65,10 @@ class RecyclerFragment : Fragment(){
         viewModelStore.clear()
         val picsumViewModel: DataSourceViewModel
                 by viewModels { DataSourceViewModelFactory(storage) }
-
         picsumViewModel.itemPagedList.observe(viewLifecycleOwner, { pics ->
+            //showLayer(pics)
+            //pics.dataSource.invalidate()
             picsumAdapter.submitList(pics)
-            //pics?.let { showLayer(pics) }
         })
     }
 

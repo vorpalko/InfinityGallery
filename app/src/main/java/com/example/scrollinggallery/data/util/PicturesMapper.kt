@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.data
+package com.example.scrollinggallery.data.util
 
 import com.example.scrollinggallery.data.model.PictureEntity
 import com.example.scrollinggallery.data.model.ResponseDTO

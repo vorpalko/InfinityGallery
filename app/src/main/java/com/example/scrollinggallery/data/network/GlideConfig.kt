@@ -10,7 +10,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.module.AppGlideModule
 import com.bumptech.glide.request.RequestOptions
-import com.example.scrollinggallery.data.network.CACHE_ENABLED
+import com.example.scrollinggallery.data.util.CACHE_ENABLED
 import me.jessyan.progressmanager.ProgressManager
 import okhttp3.OkHttpClient
 import java.io.InputStream

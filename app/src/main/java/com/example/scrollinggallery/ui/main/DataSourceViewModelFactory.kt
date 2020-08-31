@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.domain
+package com.example.scrollinggallery.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

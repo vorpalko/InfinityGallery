@@ -2,7 +2,8 @@ package com.example.scrollinggallery.domain
 
 import androidx.paging.PageKeyedDataSource
 import com.example.scrollinggallery.data.PicsRepository
-import com.example.scrollinggallery.data.network.FIRST_PAGE
+import com.example.scrollinggallery.data.util.FIRST_PAGE
+import com.example.scrollinggallery.data.util.decremented
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

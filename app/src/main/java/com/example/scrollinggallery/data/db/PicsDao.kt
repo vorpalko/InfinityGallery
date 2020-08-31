@@ -9,7 +9,6 @@ interface PicsDao {
     @Query("SELECT * FROM PictureEntity WHERE id = :id")
     suspend fun getById(id: Int): PictureEntity
 
-    //@Query("SELECT * FROM PictureEntity WHERE id BETWEEN :from AND :to")
     @Query("SELECT * FROM PictureEntity LIMIT :to OFFSET :from")
     suspend fun getPage(from: Int, to: Int): List<PictureEntity>
 

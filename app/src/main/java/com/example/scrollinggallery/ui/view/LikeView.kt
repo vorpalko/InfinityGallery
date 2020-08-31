@@ -16,7 +16,6 @@ class LikeView(
 ): RelativeLayout(context, attrs) {
     private var imageHeart: AppCompatImageView? = null
 
-
     init {
         imageHeart = AppCompatImageView(context)
 

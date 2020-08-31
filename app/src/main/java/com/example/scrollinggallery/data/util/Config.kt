@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.data.network
+package com.example.scrollinggallery.data.util
 
 const val PAGE_SIZE = 4
 const val FIRST_PAGE = 1

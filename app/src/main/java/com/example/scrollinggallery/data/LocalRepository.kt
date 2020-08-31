@@ -2,9 +2,10 @@ package com.example.scrollinggallery.data
 
 import com.example.scrollinggallery.AppController
 import com.example.scrollinggallery.AppController.Companion.localIds
+import com.example.scrollinggallery.data.util.PicturesMapper
 import com.example.scrollinggallery.domain.Pic
-import com.example.scrollinggallery.domain.hasInLocalStorage
-import com.example.scrollinggallery.domain.pageToIndex
+import com.example.scrollinggallery.data.util.hasInLocalStorage
+import com.example.scrollinggallery.data.util.pageToIndex
 
 class LocalRepository: PicsRepository {
 
