@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?:let {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.mainFrameContainer, PicsListFragment().newInstance(), "MAIN_FRAGMENT")
+                .replace(R.id.mainFrameContainer, PicsFragment().newInstance(), "MAIN_FRAGMENT")
                 .commit()
         }
     }
@@ -46,9 +46,12 @@ class MainActivity : AppCompatActivity() {
                 super.onOptionsItemSelected(item)
             }
         }
-        val articleFrag = supportFragmentManager.findFragmentByTag("MAIN_FRAGMENT") as PicsListFragment
-        articleFrag.changeRepositoryType()
+        reloadList()
         return true
     }
 
+    private fun reloadList(){
+        val articleFrag = supportFragmentManager.findFragmentByTag("MAIN_FRAGMENT") as PicsFragment
+        articleFrag.changeRepositoryType()
+    }
 }

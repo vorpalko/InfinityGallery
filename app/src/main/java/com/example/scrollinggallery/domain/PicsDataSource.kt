@@ -4,11 +4,10 @@ import androidx.paging.PageKeyedDataSource
 import com.example.scrollinggallery.data.PicsRepository
 import com.example.scrollinggallery.data.util.FIRST_PAGE
 import com.example.scrollinggallery.data.util.decremented
-import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class PicsDataSource(
-            private val scope: CoroutineScope,
             private val repository: PicsRepository
 ): PageKeyedDataSource<Int, Pic>() {
 
@@ -16,7 +15,7 @@ class PicsDataSource(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, Pic>
     ) {
-        scope.launch {
+        GlobalScope.launch {//todo: change scope
             val data = repository.getList(FIRST_PAGE)
             callback.onResult(data, null, FIRST_PAGE + 1)
         }
@@ -26,7 +25,7 @@ class PicsDataSource(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, Pic>
     ) {
-        scope.launch {
+        GlobalScope.launch {
             val data = repository.getList(params.key)
             callback.onResult(data, decremented(params.key))
         }
@@ -36,7 +35,7 @@ class PicsDataSource(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, Pic>
     ) {
-        scope.launch {
+        GlobalScope.launch {
             val data = repository.getList(params.key)
             callback.onResult(data,params.key + 1)
         }

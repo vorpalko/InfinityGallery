@@ -3,9 +3,9 @@ package com.example.scrollinggallery.ui.adapter
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import com.example.scrollinggallery.data.model.ResponseDTO
 import com.example.scrollinggallery.domain.Pic
 
+//(val adapterOnClick : (Any) -> Unit)
 class PicsumAdapter: PagedListAdapter<Pic, PictureHolder>(PicturesDiffCallback) {
 
     override fun onBindViewHolder(holder: PictureHolder, position: Int) {
@@ -13,8 +13,7 @@ class PicsumAdapter: PagedListAdapter<Pic, PictureHolder>(PicturesDiffCallback) 
         item?.let { holder.bind(item) }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        PictureHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PictureHolder(parent)
 
     /*  Переопределение этих методов нужно для решения проблемы, возникающей, когда пользователь
     видит на холдерах, вытащенных из пула ресайклера, старые значения*/

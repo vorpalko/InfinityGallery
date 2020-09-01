@@ -1,13 +1,18 @@
 package com.example.scrollinggallery.ui.main
 
-enum class Status {
+enum class DataType{
+    LOCAL,
+    REMOTE;
+
+    fun swap(type :DataType) =
+        if(type == LOCAL)
+            REMOTE
+        else
+            LOCAL
+}
+
+enum class Status{
     SUCCESS,
     ERROR,
     LOADING
-}
-
-enum class ErrorCode {
-    NO_DATA,
-    NETWORK_ERROR,
-    UNKNOWN_ERROR
 }
