@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.scrollinggallery.R
 import com.example.scrollinggallery.data.RepositoryProvider
 import com.example.scrollinggallery.domain.Pic
+import com.example.scrollinggallery.domain.PicDetailed
 import kotlinx.android.synthetic.main.list_item_picture.view.*
 import me.jessyan.progressmanager.ProgressManager
 import com.example.scrollinggallery.ui.adapter.extensions.DoubleTapListener
@@ -24,14 +25,14 @@ class PictureHolder(
 ){
     lateinit var pic: Pic
 
-    fun bind(picture: Pic) {
-        this.pic = picture
+    fun bind(picture: PicDetailed) {
+        this.pic = picture.pic
 
         initHolder()
         loadImage()
     }
 
-    private fun saveToDB(){   //todo: вынести из холдера
+    private fun saveToDB(){   //todo: вынести из холдера, scope
         GlobalScope.launch {
             RepositoryProvider().getLocalRepo().addToDB(pic)
         }

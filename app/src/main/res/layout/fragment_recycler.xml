@@ -11,7 +11,5 @@
         android:layout_height="match_parent" />
 
     <include
-        android:id="@+id/fragmentRecyclerErrorLayout"
-        layout="@layout/view_error_recycler"
-        android:visibility="gone" />
+        layout="@layout/view_error_recycler" />
 </FrameLayout>

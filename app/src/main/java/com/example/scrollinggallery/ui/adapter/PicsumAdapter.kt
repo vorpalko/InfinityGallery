@@ -4,9 +4,10 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.scrollinggallery.domain.Pic
+import com.example.scrollinggallery.domain.PicDetailed
 
 //(val adapterOnClick : (Any) -> Unit)
-class PicsumAdapter: PagedListAdapter<Pic, PictureHolder>(PicturesDiffCallback) {
+class PicsumAdapter: PagedListAdapter<PicDetailed, PictureHolder>(PicturesDiffCallback) {
 
     override fun onBindViewHolder(holder: PictureHolder, position: Int) {
         val item = getItem(position)
@@ -22,12 +23,12 @@ class PicsumAdapter: PagedListAdapter<Pic, PictureHolder>(PicturesDiffCallback) 
     override fun getItemViewType(position: Int) = position
 
     companion object {
-        private val PicturesDiffCallback = object : DiffUtil.ItemCallback<Pic>() {
-            override fun areItemsTheSame(oldItem: Pic, newItem: Pic) =
-                oldItem.url == newItem.url
+        private val PicturesDiffCallback = object : DiffUtil.ItemCallback<PicDetailed>() {
+            override fun areItemsTheSame(oldItem: PicDetailed, newItem: PicDetailed) =
+                oldItem.pic == newItem.pic
 
-            override fun areContentsTheSame(oldItem: Pic, newItem: Pic) =
-                oldItem == newItem
+            override fun areContentsTheSame(oldItem: PicDetailed, newItem: PicDetailed) =
+                oldItem.pic.url == newItem.pic.url
         }
     }
 }

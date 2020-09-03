@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.scrollinggallery.R
-import com.example.scrollinggallery.domain.Pic
+import com.example.scrollinggallery.domain.Status
 import com.example.scrollinggallery.ui.adapter.PicsumAdapter
 import com.example.scrollinggallery.ui.adapter.extensions.PictureCardDecorator
 import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.view_error_recycler.*
 
 class PicsFragment : Fragment(){
 
@@ -29,19 +29,32 @@ class PicsFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        picsumViewModel = ViewModelProvider(this).get(PicsViewModel::class.java)
-
         initRecycler()
         setupList()
-    }
 
-    fun changeRepositoryType() =
-        picsumViewModel.swapSourceState()
+        layoutErrorButtonRetry.setOnClickListener {
+            picsumViewModel.retryConnection()
+        }
+    }
 
     fun newInstance() =
         PicsFragment()
 
+    fun changeRepositoryType(){
+        picsumViewModel.swapSourceState(this)
+    }
+
+
     private fun setupList(){
+        picsumViewModel = ViewModelProvider(this, PicsViewModelFactory(this)).get(PicsViewModel::class.java)
+
+        picsumViewModel.listStatus.observe(viewLifecycleOwner, { status ->
+            if (status != null)
+                showLayer(status)
+            else
+                showLayer(Status.ERROR)
+        })
+
         picsumViewModel.sourceState.observe(viewLifecycleOwner, { state ->
             picsumViewModel.changeRepo(state)
 
@@ -50,18 +63,15 @@ class PicsFragment : Fragment(){
                 picsumAdapter.submitList(pics)
             })
         })
-        //picsumViewModel.listStatus.observe(viewLifecycleOwner, { status ->
-        //
-        //})
     }
 
-    private fun showLayer(pics: PagedList<Pic>) {
-        if (pics.isEmpty()){
+    private fun showLayer(status: Status) {
+        if (status == Status.ERROR){
             fragmentRecyclerList.visibility = View.GONE
-            fragmentRecyclerErrorLayout.visibility = View.VISIBLE
+            layoutError.visibility = View.VISIBLE
         } else {
             fragmentRecyclerList.visibility = View.VISIBLE
-            fragmentRecyclerErrorLayout.visibility = View.GONE
+            layoutError.visibility = View.GONE
         }
     }
 

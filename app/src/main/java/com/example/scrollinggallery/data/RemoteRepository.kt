@@ -5,17 +5,24 @@ import com.example.scrollinggallery.data.util.hasInLocalStorage
 import com.example.scrollinggallery.data.network.ApiFactory
 import com.example.scrollinggallery.data.util.PAGE_SIZE
 import com.example.scrollinggallery.data.util.PicturesMapper
+import com.example.scrollinggallery.domain.PicDetailed
 
 class RemoteRepository : PicsRepository {
 
-    override suspend fun getList(page: Int): List<Pic>{
-        val pics = PicturesMapper().listFromNetwork(
-            ApiFactory.picsumApi.getPicturesByPage(page, PAGE_SIZE))
+    override suspend fun getList(page: Int): List<PicDetailed>{
+        val detailedList = ArrayList<PicDetailed>()
 
-        pics.forEach {
-            it.isLiked = hasInLocalStorage(it.id)
+        try {
+            val pics = PicturesMapper().listFromNetwork(
+                ApiFactory.picsumApi.getPicturesByPage(page, PAGE_SIZE))
+            pics.forEach {
+                it.isLiked = hasInLocalStorage(it.id)
+                detailedList.add(PicDetailed.newSuccessPic(it))
+            }
         }
-
-        return pics
+        catch (e: Exception){
+            detailedList.add(PicDetailed.newErrorPic())
+        }
+        return detailedList
     }
 }

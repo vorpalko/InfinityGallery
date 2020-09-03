@@ -13,4 +13,9 @@
     <dimen name="card_text_size">16sp</dimen>
 
     <dimen name="progressBar_size">90dp</dimen>
+    <dimen name="activity_margin_quarter">8dp</dimen>
+    <dimen name="activity_margin_content">8dp</dimen>
 </resources>
+
+
+
