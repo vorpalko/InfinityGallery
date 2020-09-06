@@ -1,24 +1,35 @@
-package com.example.scrollinggallery.ui.main
+package com.example.scrollinggallery.ui.main.remote
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.viewModels
 import com.example.scrollinggallery.R
+import com.example.scrollinggallery.domain.Pic
 import com.example.scrollinggallery.domain.Status
 import com.example.scrollinggallery.ui.adapter.PicsumAdapter
-import com.example.scrollinggallery.ui.adapter.extensions.PictureCardDecorator
+import com.example.scrollinggallery.ui.adapter.list_utils.PictureCardDecorator
+import com.example.scrollinggallery.ui.main.PicItemCallback
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_recycler.*
 import kotlinx.android.synthetic.main.view_error_recycler.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
-class PicsFragment : Fragment(){
+@AndroidEntryPoint
+class RemoteStorageFragment: Fragment(), PicItemCallback {
 
-    private lateinit var picsumViewModel: PicsViewModel
+    companion object{
+        @JvmStatic
+        fun newInstance() = RemoteStorageFragment()
+    }
 
-    private val picsumAdapter = PicsumAdapter()
+    private val picsumViewModel: RemoteViewModel by viewModels()
+
+    private val picsumAdapter = PicsumAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,28 +37,29 @@ class PicsFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initRecycler()
         setupList()
-
         layoutErrorButtonRetry.setOnClickListener {
+            //setupList()
             picsumViewModel.retryConnection()
         }
     }
 
-    fun newInstance() =
-        PicsFragment()
-
-    fun changeRepositoryType(){
-        picsumViewModel.swapSourceState(this)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        fragmentRecyclerList.adapter = null
+        layoutErrorButtonRetry.setOnClickListener(null)
     }
 
+    override fun savePicCallback(pic: Pic) = picsumViewModel.addToDB(pic)
+
+    override fun deletePicCallback(pic: Pic) = picsumViewModel.removeFromDB(pic)
 
     private fun setupList(){
-        picsumViewModel = ViewModelProvider(this, PicsViewModelFactory(this)).get(PicsViewModel::class.java)
-
+        viewModelStore.clear()
         picsumViewModel.listStatus.observe(viewLifecycleOwner, { status ->
             if (status != null)
                 showLayer(status)
@@ -55,13 +67,8 @@ class PicsFragment : Fragment(){
                 showLayer(Status.ERROR)
         })
 
-        picsumViewModel.sourceState.observe(viewLifecycleOwner, { state ->
-            picsumViewModel.changeRepo(state)
-
-            picsumViewModel.pagedList.observe(viewLifecycleOwner, { pics ->
-                //pics.dataSource.invalidate()
-                picsumAdapter.submitList(pics)
-            })
+        picsumViewModel.pagedList.observe(viewLifecycleOwner, { pics ->
+            picsumAdapter.submitList(pics)
         })
     }
 
@@ -77,7 +84,6 @@ class PicsFragment : Fragment(){
 
     private fun initRecycler(){
         fragmentRecyclerList.apply {
-            layoutManager = LinearLayoutManager(activity)
             addItemDecoration(PictureCardDecorator())
             picsumAdapter.setHasStableIds(true)
             adapter = picsumAdapter

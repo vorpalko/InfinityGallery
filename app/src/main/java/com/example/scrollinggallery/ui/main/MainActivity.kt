@@ -5,11 +5,15 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.scrollinggallery.R
+import com.example.scrollinggallery.ui.main.local.LocalStorageFragment
+import com.example.scrollinggallery.ui.main.remote.RemoteStorageFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    var itemBack: MenuItem? = null
-    var itemFavorites: MenuItem? = null
+    private var itemBack: MenuItem? = null
+    private var itemFavorites: MenuItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -18,8 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         savedInstanceState?:let {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.mainFrameContainer, PicsFragment().newInstance(), "MAIN_FRAGMENT")
-                .commit()
+                .replace(R.id.mainFrameContainer, RemoteStorageFragment.newInstance()).commit()
         }
     }
 
@@ -37,21 +40,21 @@ class MainActivity : AppCompatActivity() {
             R.id.actionBack -> {
                 item.isVisible = false
                 itemFavorites?.isVisible = true
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.mainFrameContainer, RemoteStorageFragment.newInstance()).commit()
             }
             R.id.actionFavorites -> {
                 item.isVisible = false
                 itemBack?.isVisible = true
+
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.mainFrameContainer, LocalStorageFragment.newInstance()).commit()
             }
             else -> {
                 super.onOptionsItemSelected(item)
             }
         }
-        reloadList()
         return true
-    }
-
-    private fun reloadList(){
-        val articleFrag = supportFragmentManager.findFragmentByTag("MAIN_FRAGMENT") as PicsFragment
-        articleFrag.changeRepositoryType()
     }
 }

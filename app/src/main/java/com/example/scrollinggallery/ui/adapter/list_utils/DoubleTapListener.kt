@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.ui.adapter.extensions
+package com.example.scrollinggallery.ui.adapter.list_utils
 
 import android.view.GestureDetector
 import android.view.MotionEvent

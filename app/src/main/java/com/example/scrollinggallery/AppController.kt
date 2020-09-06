@@ -4,11 +4,13 @@ import android.app.Application
 import androidx.room.Room
 import com.example.scrollinggallery.data.db.PicsDao
 import com.example.scrollinggallery.data.db.PicsDatabase
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
+@HiltAndroidApp
 class AppController: Application() {
 
     companion object{

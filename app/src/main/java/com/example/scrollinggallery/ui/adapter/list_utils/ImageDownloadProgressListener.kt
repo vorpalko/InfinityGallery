@@ -1,4 +1,4 @@
-package com.example.scrollinggallery.ui.adapter.extensions
+package com.example.scrollinggallery.ui.adapter.list_utils
 
 import android.view.View
 import android.widget.TextView

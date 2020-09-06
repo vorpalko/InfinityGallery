@@ -18,11 +18,6 @@ import java.io.InputStream
 @GlideModule
 class GlideConfig : AppGlideModule(){
 
-    private fun getOkHttpClient(): OkHttpClient =
-        ProgressManager.getInstance()
-            .with(OkHttpClient.Builder())
-            .build()
-
     override fun isManifestParsingEnabled() = false
 
     override fun applyOptions(context: Context, builder: GlideBuilder){
@@ -47,4 +42,9 @@ class GlideConfig : AppGlideModule(){
             OkHttpUrlLoader.Factory(getOkHttpClient())
         )
     }
+
+    private fun getOkHttpClient(): OkHttpClient =
+        ProgressManager.getInstance()
+            .with(OkHttpClient.Builder())
+            .build()
 }

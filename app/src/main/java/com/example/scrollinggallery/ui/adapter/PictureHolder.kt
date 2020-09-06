@@ -7,41 +7,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.scrollinggallery.R
-import com.example.scrollinggallery.data.RepositoryProvider
 import com.example.scrollinggallery.domain.Pic
 import com.example.scrollinggallery.domain.PicDetailed
 import kotlinx.android.synthetic.main.list_item_picture.view.*
 import me.jessyan.progressmanager.ProgressManager
-import com.example.scrollinggallery.ui.adapter.extensions.DoubleTapListener
-import com.example.scrollinggallery.ui.adapter.extensions.ImageDownloadProgressListener
-import com.example.scrollinggallery.ui.adapter.extensions.ResourceDownloadingListener
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.scrollinggallery.ui.adapter.list_utils.DoubleTapListener
+import com.example.scrollinggallery.ui.adapter.list_utils.ImageDownloadProgressListener
+import com.example.scrollinggallery.ui.adapter.list_utils.ResourceDownloadingListener
+import com.example.scrollinggallery.ui.main.PicItemCallback
 
 class PictureHolder(
             parent: ViewGroup
 ): RecyclerView.ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.list_item_picture, parent, false)
 ){
-    lateinit var pic: Pic
 
-    fun bind(picture: PicDetailed) {
+    lateinit var pic: Pic
+    lateinit var picItemCallback: PicItemCallback
+
+    fun bind(picture: PicDetailed, picItemCallback: PicItemCallback) {
+        this.picItemCallback = picItemCallback
         this.pic = picture.pic
 
         initHolder()
         loadImage()
-    }
-
-    private fun saveToDB(){   //todo: вынести из холдера, scope
-        GlobalScope.launch {
-            RepositoryProvider().getLocalRepo().addToDB(pic)
-        }
-    }
-
-    private fun removeFromDB(){
-        GlobalScope.launch {
-            RepositoryProvider().getLocalRepo().removeFromDB(pic)
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -53,12 +42,12 @@ class PictureHolder(
         itemView.listPictureToggleLike.setOnClickListener {
             if(pic.isLiked){
                 pic.isLiked = false
-                removeFromDB()
+                picItemCallback.deletePicCallback(pic)
                 itemView.listPictureToggleLike.isChecked = false
             }
             else{
                 pic.isLiked = true
-                saveToDB()
+                picItemCallback.savePicCallback(pic)
                 itemView.listPictureImageLike.start()
                 itemView.listPictureToggleLike.isChecked = true
             }
