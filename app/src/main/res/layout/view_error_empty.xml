@@ -16,7 +16,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FSALGFKSDFHGLDFSKLH;LDFGSKHKL;L;DFGHLK;FDG"/>
+            android:text="@string/error_cause_empty"/>
 
         <TextView
             style="@style/TextAppearance.AppCompat.Caption"
@@ -24,17 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/padding_small"
-            android:text="@string/error_cause"/>
-
-        <Button
-            android:id="@+id/layoutErrorButtonRetry"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/padding_small"
-            android:text="@string/btn_retry"
-            android:textColor="@color/colorPrimary"/>
+            android:text="@string/error_message_empty"/>
 
     </LinearLayout>
 </merge>

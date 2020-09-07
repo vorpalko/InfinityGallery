@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.paging.DataSource
 import androidx.paging.PageKeyedDataSource
 import com.example.scrollinggallery.data.PicsRepository
-import timber.log.Timber
 
 class PicsDataSourceFactory(
             private val repo: PicsRepository,

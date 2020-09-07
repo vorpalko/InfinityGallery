@@ -1,6 +1,6 @@
 package com.example.scrollinggallery.di
 
-import com.example.scrollinggallery.data.network.PicsumApi
+import com.example.scrollinggallery.data.api.PicsumApi
 import com.example.scrollinggallery.data.util.API_ENDPOINT
 import dagger.Module
 import dagger.Provides

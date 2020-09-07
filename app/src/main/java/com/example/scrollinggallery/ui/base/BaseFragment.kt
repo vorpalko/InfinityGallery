@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.scrollinggallery.R
+import com.example.scrollinggallery.domain.Status
 import com.example.scrollinggallery.ui.adapter.PicsumAdapter
 import com.example.scrollinggallery.ui.adapter.list_utils.PictureCardDecorator
 import com.example.scrollinggallery.ui.main.PicItemCallback
 import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.view_error_empty.*
+import kotlinx.android.synthetic.main.view_error_network.*
 
 abstract class BaseFragment: Fragment(), PicItemCallback {
 

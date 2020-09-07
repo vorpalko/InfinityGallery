@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Infinity Gallery</string>
-    <string name="error_msg">Network error</string>
+    <string name="error_cause_network">Network error</string>
     <string name="btn_retry">Retry</string>
-    <string name="error_cause">Please check your internet connection :(</string>
+    <string name="error_message_network">Please check your internet connection :(</string>
+    <string name="error_message_empty">Please like something :(</string>
+    <string name="error_cause_empty">Gallery is empty</string>
 </resources>

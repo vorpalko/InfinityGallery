@@ -7,7 +7,7 @@ import com.example.scrollinggallery.domain.Status
 import com.example.scrollinggallery.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_recycler.*
-import kotlinx.android.synthetic.main.view_error_network.*
+import kotlinx.android.synthetic.main.view_error_empty.*
 
 @AndroidEntryPoint
 class LocalStorageFragment: BaseFragment() {
@@ -33,10 +33,10 @@ class LocalStorageFragment: BaseFragment() {
     private fun showLayer(status: Status) {
         if (status == Status.ERROR){
             fragmentRecyclerList.visibility = View.GONE
-            layoutErrorNetwork.visibility = View.VISIBLE
+            layoutErrorEmpty.visibility = View.VISIBLE
         } else {
             fragmentRecyclerList.visibility = View.VISIBLE
-            layoutErrorNetwork.visibility = View.GONE
+            layoutErrorEmpty.visibility = View.GONE
         }
     }
 }

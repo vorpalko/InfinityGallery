@@ -2,7 +2,7 @@ package com.example.scrollinggallery.data
 
 import com.example.scrollinggallery.data.model.ResponseDTO
 import com.example.scrollinggallery.domain.Pic
-import com.example.scrollinggallery.data.network.PicsumApi
+import com.example.scrollinggallery.data.api.PicsumApi
 import com.example.scrollinggallery.data.util.PAGE_SIZE
 import com.example.scrollinggallery.domain.PicDetailed
 import javax.inject.Inject

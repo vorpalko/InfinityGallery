@@ -26,7 +26,7 @@ class PicsDataSource(
         vm.viewModelScope.launch {
             val data = repository.getList(FIRST_PAGE)
             getNetworkStatus(data)
-            getFullnessStatus(data)
+            getEmptyStatus(data)
             callback.onResult(data, null, FIRST_PAGE + 1)
         }
     }
@@ -55,8 +55,7 @@ class PicsDataSource(
 
     private fun getNetworkStatus(data: List<PicDetailed>) {
         if(repository is RemotePicsRepository){
-            var state = Status.SUCCESS
-            state = if(data.isEmpty()){
+            val state = if(data.isEmpty()){
                 Status.ERROR
             } else{
                 data[0].state
@@ -66,7 +65,7 @@ class PicsDataSource(
         }
     }
 
-    private fun getFullnessStatus(data: List<PicDetailed>){
+    private fun getEmptyStatus(data: List<PicDetailed>){
         if(repository is LocalPicsRepository){
             var state = Status.SUCCESS
             if(data.isEmpty())
