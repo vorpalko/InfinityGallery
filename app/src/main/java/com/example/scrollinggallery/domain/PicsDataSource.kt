@@ -1,45 +1,32 @@
 package com.example.scrollinggallery.domain
 
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PageKeyedDataSource
-import com.example.scrollinggallery.data.LocalRepository
+import com.example.scrollinggallery.data.LocalPicsRepository
 import com.example.scrollinggallery.data.PicsRepository
-import com.example.scrollinggallery.data.RemoteRepository
+import com.example.scrollinggallery.data.RemotePicsRepository
 import com.example.scrollinggallery.data.util.FIRST_PAGE
-import com.example.scrollinggallery.data.util.decremented
-import com.example.scrollinggallery.ui.main.PicsViewModelFactory
-import com.example.scrollinggallery.ui.main.PicsFragment
-import com.example.scrollinggallery.ui.main.PicsViewModel
-import kotlinx.coroutines.GlobalScope
+import com.example.scrollinggallery.ui.main.local.LocalViewModel
+import com.example.scrollinggallery.ui.main.remote.RemoteViewModel
 import kotlinx.coroutines.launch
+
+fun decremented(value: Int) =
+    if(value > 1) value.dec() else value
 
 class PicsDataSource(
             private val repository: PicsRepository,
-            fragment: PicsFragment
+            private val vm: ViewModel
 ): PageKeyedDataSource<Int, PicDetailed>() {
-
-    private val picsumViewModel = ViewModelProvider(fragment, PicsViewModelFactory(fragment)).get(PicsViewModel::class.java)
-
-    private fun getNetworkStatus(data: List<PicDetailed>) {
-        var state = Status.SUCCESS
-        if(repository is RemoteRepository){
-            state = if(data.isEmpty()){
-                Status.ERROR
-            } else{
-                data[0].state
-            }
-        }
-
-        picsumViewModel.listStatus.postValue(state)
-    }
 
     override fun loadInitial(
         params: LoadInitialParams<Int>,
         callback: LoadInitialCallback<Int, PicDetailed>
     ) {
-        GlobalScope.launch {//todo: change scope
+        vm.viewModelScope.launch {
             val data = repository.getList(FIRST_PAGE)
             getNetworkStatus(data)
+            getEmptyStatus(data)
             callback.onResult(data, null, FIRST_PAGE + 1)
         }
     }
@@ -48,7 +35,7 @@ class PicsDataSource(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, PicDetailed>
     ) {
-        GlobalScope.launch {
+        vm.viewModelScope.launch {
             val data = repository.getList(params.key)
             getNetworkStatus(data)
             callback.onResult(data, decremented(params.key))
@@ -59,10 +46,33 @@ class PicsDataSource(
         params: LoadParams<Int>,
         callback: LoadCallback<Int, PicDetailed>
     ) {
-        GlobalScope.launch {
+        vm.viewModelScope.launch {
             val data = repository.getList(params.key)
             getNetworkStatus(data)
             callback.onResult(data,params.key + 1)
         }
     }
+
+    private fun getNetworkStatus(data: List<PicDetailed>) {
+        if(repository is RemotePicsRepository){
+            val state = if(data.isEmpty()){
+                Status.ERROR
+            } else{
+                data[0].state
+            }
+            if(vm is RemoteViewModel)
+                vm.listStatus.postValue(state)
+        }
+    }
+
+    private fun getEmptyStatus(data: List<PicDetailed>){
+        if(repository is LocalPicsRepository){
+            var state = Status.SUCCESS
+            if(data.isEmpty())
+                state = Status.ERROR
+            if(vm is LocalViewModel)
+                vm.listStatus.postValue(state)
+        }
+    }
+
 }
