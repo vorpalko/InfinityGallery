@@ -13,5 +13,8 @@
         android:layout_height="match_parent" />
 
     <include
-        layout="@layout/view_error_recycler" />
+        layout="@layout/view_error_network" />
+
+    <include
+        layout="@layout/view_error_empty" />
 </FrameLayout>

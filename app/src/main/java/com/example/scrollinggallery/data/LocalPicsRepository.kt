@@ -1,15 +1,14 @@
 package com.example.scrollinggallery.data
 
-import com.example.scrollinggallery.AppController
-import com.example.scrollinggallery.AppController.Companion.localIds
+import com.example.scrollinggallery.data.LocalPicsRepository.Companion.localIds
 import com.example.scrollinggallery.data.db.PicsDao
 import com.example.scrollinggallery.data.model.PictureEntity
-import com.example.scrollinggallery.data.network.PicsumApi
 import com.example.scrollinggallery.data.util.PAGE_SIZE
 import com.example.scrollinggallery.domain.Pic
-import com.example.scrollinggallery.data.util.hasInLocalStorage
 import com.example.scrollinggallery.domain.PicDetailed
 import javax.inject.Inject
+
+fun hasInLocalStorage(id: Int) = localIds.contains(id)
 
 fun pageToIndex(page: Int): Pair<Int, Int> = Pair((page - 1) * PAGE_SIZE, PAGE_SIZE)
 
@@ -28,6 +27,10 @@ fun listFromEntities(list: List<PictureEntity>?): List<Pic>{
 class LocalPicsRepository@Inject constructor(
             private val database: PicsDao
 ): PicsRepository {
+
+    companion object{
+        val localIds = ArrayList<Int>()
+    }
 
     override suspend fun getList(page: Int): List<PicDetailed>{
         val detailedList = ArrayList<PicDetailed>()
@@ -48,7 +51,7 @@ class LocalPicsRepository@Inject constructor(
 
         if(!hasInLocalStorage(id)){
             localIds.add(id)
-            AppController.database.insert(picToEntity(pic))
+            database.insert(picToEntity(pic))
         }
     }
 
@@ -56,6 +59,6 @@ class LocalPicsRepository@Inject constructor(
         val id = pic.id
 
         localIds.remove(id)
-        AppController.database.delete(id)
+        database.delete(id)
     }
 }

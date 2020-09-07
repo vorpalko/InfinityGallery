@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination = "@+id/remoteStorageFragment">
+
+    <fragment
+        android:id="@+id/localStorageFragment"
+        android:name="com.example.scrollinggallery.ui.main.local.LocalStorageFragment"
+        android:label="LocalStorageFragment" >
+        <action
+            android:id="@+id/action_localStorageFragment_to_remoteStorageFragment"
+            app:destination="@id/remoteStorageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/remoteStorageFragment"
+        android:name="com.example.scrollinggallery.ui.main.remote.RemoteStorageFragment"
+        android:label="RemoteStorageFragment" >
+        <action
+            android:id="@+id/action_remoteStorageFragment_to_localStorageFragment"
+            app:destination="@id/localStorageFragment" />
+    </fragment>
+</navigation>

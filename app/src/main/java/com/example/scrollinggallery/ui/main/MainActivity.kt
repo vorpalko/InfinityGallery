@@ -4,34 +4,42 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.example.scrollinggallery.R
-import com.example.scrollinggallery.ui.main.local.LocalStorageFragment
-import com.example.scrollinggallery.ui.main.remote.RemoteStorageFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private var itemBack: MenuItem? = null
-    private var itemFavorites: MenuItem? = null
+    private lateinit var menuItemBack: MenuItem
+    private lateinit var menuItemFavorites: MenuItem
+
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        savedInstanceState?:let {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.mainFrameContainer, RemoteStorageFragment.newInstance()).commit()
-        }
+        val host: NavHostFragment = supportFragmentManager
+            .findFragmentById(R.id.mainFragmentContainer) as NavHostFragment
+        navController = host.navController
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.appbar_menu, menu)
+        menuItemFavorites = menu.findItem(R.id.actionFavorites)
+        menuItemBack = menu.findItem(R.id.actionBack)
 
-        itemFavorites = menu!!.findItem(R.id.actionFavorites)
-        itemBack = menu.findItem(R.id.actionBack)
-        itemBack?.isVisible = false
+        if(navController.currentDestination?.id == R.id.remoteStorageFragment){
+            menuItemBack.isVisible = false
+            menuItemFavorites.isVisible = true
+        }
+        else{
+            menuItemBack.isVisible = true
+            menuItemFavorites.isVisible = false
+        }
         return true
     }
 
@@ -39,22 +47,35 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.actionBack -> {
                 item.isVisible = false
-                itemFavorites?.isVisible = true
-
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.mainFrameContainer, RemoteStorageFragment.newInstance()).commit()
+                menuItemFavorites.isVisible = true
+                navController.navigate(R.id.remoteStorageFragment)
             }
             R.id.actionFavorites -> {
                 item.isVisible = false
-                itemBack?.isVisible = true
-
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.mainFrameContainer, LocalStorageFragment.newInstance()).commit()
+                menuItemBack.isVisible = true
+                navController.navigate(R.id.localStorageFragment)
             }
             else -> {
                 super.onOptionsItemSelected(item)
             }
         }
         return true
+    }
+
+    //поддержка бэкстека для локального репозитория
+    override fun onBackPressed() {
+        when (navController.currentDestination?.id) {
+            R.id.localStorageFragment -> {
+                menuItemFavorites.isVisible = true
+                menuItemBack.isVisible = false
+                navController.navigate(R.id.remoteStorageFragment)
+            }
+            R.id.remoteStorageFragment -> {
+                finish()
+            }
+            else -> {
+                super.onBackPressed()
+            }
+        }
     }
 }

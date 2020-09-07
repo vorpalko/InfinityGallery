@@ -1,9 +1,8 @@
 package com.example.scrollinggallery
 
 import android.app.Application
-import androidx.room.Room
-import com.example.scrollinggallery.data.db.PicsDao
-import com.example.scrollinggallery.data.db.PicsDatabase
+import com.example.scrollinggallery.data.LocalPicsRepository.Companion.localIds
+import com.example.scrollinggallery.di.DatabaseModule
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -13,26 +12,20 @@ import timber.log.Timber.DebugTree
 @HiltAndroidApp
 class AppController: Application() {
 
-    companion object{
-        lateinit var database: PicsDao
-        lateinit var localIds: ArrayList<Int>
-    }
-
     override fun onCreate() {
         super.onCreate()
 
+        initLikedPics()
         if (BuildConfig.DEBUG)
             Timber.plant(DebugTree())
+    }
 
-        database = Room.databaseBuilder(baseContext, PicsDatabase::class.java, "pics.db")
-            .fallbackToDestructiveMigration()
-            .build().picsDao()
-
+    private fun initLikedPics(){
         GlobalScope.launch {
-            localIds = ArrayList()
-            database.getAll().forEach {
-                localIds.add(it.picture_id)
-            }
+            DatabaseModule.provideLocalDataSource(applicationContext).getAll()
+                .forEach {
+                    localIds.add(it.picture_id)
+                }
         }
     }
 }

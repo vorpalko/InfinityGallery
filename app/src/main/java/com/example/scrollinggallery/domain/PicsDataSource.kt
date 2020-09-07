@@ -3,9 +3,11 @@ package com.example.scrollinggallery.domain
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PageKeyedDataSource
+import com.example.scrollinggallery.data.LocalPicsRepository
 import com.example.scrollinggallery.data.PicsRepository
 import com.example.scrollinggallery.data.RemotePicsRepository
 import com.example.scrollinggallery.data.util.FIRST_PAGE
+import com.example.scrollinggallery.ui.main.local.LocalViewModel
 import com.example.scrollinggallery.ui.main.remote.RemoteViewModel
 import kotlinx.coroutines.launch
 
@@ -24,6 +26,7 @@ class PicsDataSource(
         vm.viewModelScope.launch {
             val data = repository.getList(FIRST_PAGE)
             getNetworkStatus(data)
+            getFullnessStatus(data)
             callback.onResult(data, null, FIRST_PAGE + 1)
         }
     }
@@ -51,17 +54,26 @@ class PicsDataSource(
     }
 
     private fun getNetworkStatus(data: List<PicDetailed>) {
-        var state = Status.SUCCESS
         if(repository is RemotePicsRepository){
+            var state = Status.SUCCESS
             state = if(data.isEmpty()){
                 Status.ERROR
             } else{
                 data[0].state
             }
-        }
-
-        if(vm is RemoteViewModel){
-            vm.listStatus.postValue(state)
+            if(vm is RemoteViewModel)
+                vm.listStatus.postValue(state)
         }
     }
+
+    private fun getFullnessStatus(data: List<PicDetailed>){
+        if(repository is LocalPicsRepository){
+            var state = Status.SUCCESS
+            if(data.isEmpty())
+                state = Status.ERROR
+            if(vm is LocalViewModel)
+                vm.listStatus.postValue(state)
+        }
+    }
+
 }

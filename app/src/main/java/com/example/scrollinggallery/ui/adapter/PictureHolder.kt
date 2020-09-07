@@ -23,7 +23,7 @@ class PictureHolder(
 ){
 
     lateinit var pic: Pic
-    lateinit var picItemCallback: PicItemCallback
+    private lateinit var picItemCallback: PicItemCallback
 
     fun bind(picture: PicDetailed, picItemCallback: PicItemCallback) {
         this.picItemCallback = picItemCallback

@@ -1,67 +1,42 @@
 package com.example.scrollinggallery.ui.main.local
 
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.scrollinggallery.R
 import com.example.scrollinggallery.domain.Pic
-import com.example.scrollinggallery.ui.adapter.PicsumAdapter
-import com.example.scrollinggallery.ui.adapter.list_utils.PictureCardDecorator
-import com.example.scrollinggallery.ui.main.PicItemCallback
+import com.example.scrollinggallery.domain.Status
+import com.example.scrollinggallery.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_recycler.*
+import kotlinx.android.synthetic.main.view_error_network.*
 
 @AndroidEntryPoint
-class LocalStorageFragment: Fragment(), PicItemCallback {
-
-    companion object{
-        @JvmStatic
-        fun newInstance() = LocalStorageFragment()
-    }
+class LocalStorageFragment: BaseFragment() {
 
     private val localViewModel: LocalViewModel by viewModels()
 
-    private val picsumAdapter = PicsumAdapter(this)
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_recycler, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initRecycler()
-        setupList()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        fragmentRecyclerList.adapter = null
-    }
-
     override fun savePicCallback(pic: Pic) = localViewModel.addToDB(pic)
 
-    override fun deletePicCallback(pic: Pic) {
-        localViewModel.removeFromDB(pic)
-    }
+    override fun deletePicCallback(pic: Pic) = localViewModel.removeFromDB(pic)
 
-    private fun setupList(){
+    override fun setupList(){
         localViewModel.pagedList.observe(viewLifecycleOwner, { pics ->
-            //invalidate
             picsumAdapter.submitList(pics)
+        })
+        localViewModel.listStatus.observe(viewLifecycleOwner, { status ->
+            if (status != null)
+                showLayer(status)
+            else
+                showLayer(Status.ERROR)
         })
     }
 
-    private fun initRecycler(){
-        fragmentRecyclerList.apply {
-            addItemDecoration(PictureCardDecorator())
-            picsumAdapter.setHasStableIds(true)
-            adapter = picsumAdapter
+    private fun showLayer(status: Status) {
+        if (status == Status.ERROR){
+            fragmentRecyclerList.visibility = View.GONE
+            layoutErrorNetwork.visibility = View.VISIBLE
+        } else {
+            fragmentRecyclerList.visibility = View.VISIBLE
+            layoutErrorNetwork.visibility = View.GONE
         }
     }
 }
